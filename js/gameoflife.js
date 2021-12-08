@@ -46,9 +46,13 @@ const printCells = (state) => {
 };
 
 const getNeighborsOf = ([x, y]) => {
-  [x-1, y+1], [x, y+1], [x+1, y+1],
-  [x-1, y],             [x+1, y],
-  [x-1, y-1], [x, y-1], [x+1, y-1]
+  const neighborDeltas = [
+    [-1,1],  [0,1],  [1,1],
+    [-1,0],  /* */,  [1,0],
+    [-1,0],  /* */   [1,0],
+    [-1,-1], [0,-1], [1,-1]
+];
+return neighborDeltas.map((d) => sum(d, [x,y]));
 };
 
 const getLivingNeighbors = (cell, state) => {
