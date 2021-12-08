@@ -45,15 +45,11 @@ const printCells = (state) => {
   return accumulator;
 };
 
-const getNeighborsOf = ([x, y]) => {
-  const neighborDeltas = [
-    [-1,1],  [0,1],  [1,1],
-    [-1,0],  /* */,  [1,0],
-    [-1,0],  /* */   [1,0],
-    [-1,-1], [0,-1], [1,-1]
+const getNeighborsOf = ([x, y]) => [
+  [x-1, y+1], [x, y+1], [x+1, y+1],
+  [x-1, y],             [x+1, y],
+  [x-1, y-1], [x, y-1], [x+1, y-1]
 ];
-return neighborDeltas.map((d) => sum(d, [x,y]));
-};
 
 const getLivingNeighbors = (cell, state) => {
   return getNeighborsOf(cell).filter((n) => contains.bind(state)(n));
